@@ -1,39 +1,71 @@
 import React from "react";
 
 const App = () => (
-  <div>
-    <header>
-      <h1>Super Sticky Notes</h1>
-      <aside>
-        <button>+ New Note</button>
-        <div>
+  <div className="app">
+    <header className="app-header">
+      <h1 className="app-header__title">Super Sticky Notes</h1>
+      <aside className="app-header__controls">
+        <button className="add-new">+ New Note</button>
+        <div className="search-field">
           <img
             src="magnifying-glass-solid-full.svg"
             alt="search icon"
             className="search-icon"
           />
-          <label className="visually-hidden" for="search">
+          <label className="visually-hidden" htmlFor="search">
             Search notes
           </label>
-          <input type="text" id="search" placeholder="ToDo" />
+          <input
+            type="text"
+            id="search"
+            placeholder="ToDo"
+            className="search"
+          />
         </div>
       </aside>
     </header>
-    <ul>
-      <li>
-        <input type="text" aria-label="Title" placeholder="ToDo Today" />
-        <textarea aria-label="Description" placeholder="Take a nap!" />
-        <span>X</span>
+    <ul className="notes-list">
+      <li className="note">
+        <input
+          type="text"
+          aria-label="Title"
+          placeholder="ToDo Today"
+          className="note__title"
+        />
+        <textarea
+          aria-label="Description"
+          placeholder="Take a nap!"
+          className="note__description"
+        />
+        <span className="note__delete">X</span>
       </li>
-      <li>
-        <input type="text" aria-label="Title" placeholder="ToDo Today" />
-        <textarea aria-label="Description" placeholder="Take a nap!" />
-        <span>X</span>
+      <li className="note">
+        <input
+          type="text"
+          aria-label="Title"
+          placeholder="ToDo Today"
+          className="note__title"
+        />
+        <textarea
+          aria-label="Description"
+          placeholder="Take a nap!"
+          className="note__description"
+        />
+        <span className="note__delete">X</span>
       </li>
-      <li>
-        <input type="text" aria-label="Title" placeholder="ToDo Today" />
-        <textarea aria-label="Description" placeholder="Take a nap!" />
-        <span>X</span>
+      <li className="note">
+        <input
+          type="text"
+          aria-label="Title"
+          placeholder="ToDo Today"
+          className="note__title"
+        />
+        <textarea
+          aria-label="Description"
+          placeholder="Take a nap!"
+          className="note__description"
+        />
+        <span className="note__delete">X</span>
       </li>
     </ul>
   </div>
