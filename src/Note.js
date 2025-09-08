@@ -1,6 +1,6 @@
 import React from "react";
 
-const Note = () => (
+const Note = (props) => (
   <li className="note">
     <input
       type="text"
