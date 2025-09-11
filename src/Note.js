@@ -7,11 +7,13 @@ const Note = (props) => (
       aria-label="Title"
       placeholder="ToDo Today"
       className="note__title"
+      value={props.note.title}
     />
     <textarea
       aria-label="Description"
       placeholder="Take a nap!"
       className="note__description"
+      value={props.note.description}
     />
     <span className="note__delete">X</span>
   </li>

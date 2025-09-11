@@ -14,7 +14,13 @@ const Header = (props) => (
         <label className="visually-hidden" htmlFor="search">
           Search notes
         </label>
-        <input type="text" id="search" placeholder="ToDo" className="search" />
+        <input
+          type="text"
+          id="search"
+          placeholder="ToDo"
+          className="search"
+          value={props.searchText}
+        />
       </div>
     </aside>
   </header>
