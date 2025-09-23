@@ -7,7 +7,14 @@ for this application, delegating rendering logic to
 presentational components. */
 class App extends Component {
   state = {
-    notes: [],
+    notes: [
+      {
+        id: Date.now(),
+        title: "",
+        description: "",
+        doesMatchSearch: true,
+      },
+    ],
     searchText: "",
   };
   addNote = () => {
@@ -41,10 +48,41 @@ class App extends Component {
     this.setState({ notes: updatedNotes });
   };
 
+  onSearch = (text) => {
+    /* toggle the doesMatchSearch boolean value of each sticky
+    note when the user types in the search field.
+    set the doesMatchSearch value to true for a sticky note if
+    it's title or description matches the search string. */
+    const newSearchText = text.toLowerCase();
+    const updatedNotes = this.state.notes.map((note) => {
+      if (!newSearchText) {
+        /* If the search field is empty, then
+      we set the doesMatchSearch value for every note to true. */
+        note.doesMatchSearch = true;
+        return note;
+      } else {
+        const title = note.title.toLowerCase();
+        const description = note.description.toLowerCase();
+        const titleMatch = title.includes(newSearchText);
+        const descriptionMatch = description.includes(newSearchText);
+        const hasMatch = titleMatch || descriptionMatch;
+        note.doesMatchSearch = hasMatch;
+        return note;
+      }
+    });
+    this.setState({
+      searchText: newSearchText,
+      notes: updatedNotes,
+    });
+  };
   render() {
     return (
       <div className="app">
-        <Header searchText={this.state.searchText} addNote={this.addNote} />
+        <Header
+          searchText={this.state.searchText}
+          addNote={this.addNote}
+          onSearch={this.onSearch}
+        />
         <NotesList notes={this.state.notes} onType={this.onType} />
       </div>
     );
