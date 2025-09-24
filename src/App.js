@@ -17,6 +17,7 @@ class App extends Component {
     ],
     searchText: "",
   };
+
   addNote = () => {
     const newNote = {
       id: Date.now(),
@@ -75,6 +76,31 @@ class App extends Component {
       notes: updatedNotes,
     });
   };
+
+  removeNote = (noteId) => {
+    /* remove note by id of note that the user clicked on */
+    const notIdMatch = (note) => note.id !== noteId;
+    const updatedNotes = this.state.notes.filter(notIdMatch);
+    this.setState({ notes: updatedNotes });
+  };
+
+  componentDidUpdate() {
+    /* after each render, save notes data to local storage */
+    const stringifiedNotes = JSON.stringify(this.state.notes);
+    localStorage.setItem("savedNotes", stringifiedNotes);
+  }
+
+  componentDidMount() {
+    /* after rendering for the first time, read saved
+    notes data from local storage and pass that data
+    to component state if it exists */
+    const stringifiedNotes = localStorage.getItem("savedNotes");
+    if (stringifiedNotes) {
+      const savedNotes = JSON.parse(stringifiedNotes);
+      this.setState({ notes: savedNotes });
+    }
+  }
+
   render() {
     return (
       <div className="app">
@@ -83,7 +109,11 @@ class App extends Component {
           addNote={this.addNote}
           onSearch={this.onSearch}
         />
-        <NotesList notes={this.state.notes} onType={this.onType} />
+        <NotesList
+          notes={this.state.notes}
+          onType={this.onType}
+          removeNote={this.removeNote}
+        />
       </div>
     );
   }
